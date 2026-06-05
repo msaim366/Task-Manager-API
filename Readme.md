@@ -1,44 +1,43 @@
 # Task Manager Application
 
-A backend task management application built using Spring Boot, PostgreSQL, and Docker. The application provides RESTful APIs for creating, retrieving, updating, and deleting tasks while storing data in a PostgreSQL database.
+A full-stack task management application built using Java, Spring Boot, PostgreSQL, and Docker. The application allows users to create, retrieve, update, and delete tasks through a web interface while persisting data in a PostgreSQL database.
 
-## Technologies Used
+## Features
+
+* Create, retrieve, update, and delete tasks (CRUD operations)
+* RESTful backend API developed with Spring Boot
+* PostgreSQL database integration using Spring Data JPA and Hibernate
+* Dockerized application and database using Docker Compose
+* Automated database schema creation through Hibernate
+* Simple web-based user interface for task management
+
+## Technologies
 
 * Java 21
 * Spring Boot
 * Spring Data JPA
+* Hibernate
 * PostgreSQL
 * Docker
 * Docker Compose
 * Maven
+* HTML/CSS/JavaScript
 
-## Features
+## Architecture
 
-* Create tasks
-* View tasks
-* Update tasks
-* Delete tasks
-* PostgreSQL database persistence
-* Containerized deployment using Docker
+Frontend (HTML/CSS/JavaScript)
+↓
+Spring Boot REST API
+↓
+Spring Data JPA / Hibernate
+↓
+PostgreSQL Database
 
-## Project Structure
-
-```text
-src/
-├── main/
-│   ├── java/
-│   └── resources/
-├── test/
-pom.xml
-Dockerfile
-docker-compose.yml
-```
-
-## Running with Docker
+## Running the Application
 
 ### Prerequisites
 
-* Docker Desktop installed
+* Docker Desktop
 
 ### Build and Run
 
@@ -46,16 +45,10 @@ docker-compose.yml
 docker compose up --build
 ```
 
-The application will start on:
+The application will be available at:
 
 ```text
 http://localhost:8080
-```
-
-The PostgreSQL database will run on:
-
-```text
-localhost:5432
 ```
 
 ### Stop the Application
@@ -64,18 +57,31 @@ localhost:5432
 docker compose down
 ```
 
-## Database Configuration
+## Screenshots
 
-PostgreSQL is configured through Docker Compose and automatically starts with the application.
+### Task Manager Interface
 
-Database Name: taskdb
+![Task Manager UI](screenshots/task-manager-ui.png)
 
-Username: postgres
+### Docker Containers Running
 
-Password: postgres
+![Docker Containers](screenshots/docker-containers.png)
+
+## Learning Outcomes
+
+This project provided practical experience with:
+
+* Backend development using Spring Boot
+* Database design and persistence with PostgreSQL
+* REST API development
+* Containerization using Docker
+* Multi-container deployment using Docker Compose
+* Debugging application and database connectivity issues
 
 ## Author
 
 Saim Muhammad
+
 Bachelor of Software Engineering
+
 Macquarie University
