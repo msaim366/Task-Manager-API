@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Manager</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            margin: 50px auto;
+            width: 400px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 5px;
+        }
+        button {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        #tasks {
+            margin-top: 20px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Task Manager</h2>
+
+    <input id="id" placeholder="ID"><br>
+    <input id="title" placeholder="Title"><br>
+    <input id="desc" placeholder="Description"><br>
+
+    <button onclick="createTask()">Create</button>
+    <button onclick="getTasks()">Get All</button>
+    <button onclick="updateTask()">Update</button>
+    <button onclick="deleteTask()">Delete</button>
+
+    <div id="tasks"></div>
+</div>
+
+<script>
+
+const API = "http://localhost:8080/tasks";
+
+function createTask() {
+    fetch(API, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            id: document.getElementById("id").value,
+            title: document.getElementById("title").value,
+            description: document.getElementById("desc").value
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert("Task Created");
+        getTasks();
+    });
+}
+
+function getTasks() {
+    fetch(API)
+    .then(res => res.json())
+    .then(data => {
+        let output = "<h3>Tasks:</h3>";
+        data.forEach(task => {
+            output += `<p><b>${task.id}</b>: ${task.title} - ${task.description}</p>`;
+        });
+        document.getElementById("tasks").innerHTML = output;
+    });
+}
+
+function updateTask() {
+    fetch(API + "/" + document.getElementById("id").value, {
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            id: document.getElementById("id").value,
+            title: document.getElementById("title").value,
+            description: document.getElementById("desc").value
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert("Task Updated");
+        getTasks();
+    });
+}
+
+function deleteTask() {
+    let id = document.getElementById("id").value;
+    fetch(API + "/" + id, {
+        method: "DELETE"
+    })
+    .then(() => {
+        alert("Deleted");
+        getTasks();
+    });
+}
+
+</script>
+
+</body>
+</html>
